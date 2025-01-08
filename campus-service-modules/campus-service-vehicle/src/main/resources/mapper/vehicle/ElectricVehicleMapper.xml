@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.vehicle.mapper.ElectricVehicleMapper">
+    
+    <resultMap type="ElectricVehicle" id="ElectricVehicleResult">
+        <result property="vehicleId"    column="vehicle_id"    />
+        <result property="ownerName"    column="owner_name"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="plateNumber"    column="plate_number"    />
+        <result property="brand"    column="brand"    />
+        <result property="registerTime"    column="register_time"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectElectricVehicleVo">
+        select vehicle_id, owner_name, phone_number, plate_number, brand, register_time, status from electric_vehicle
+    </sql>
+
+    <select id="selectElectricVehicleList" parameterType="ElectricVehicle" resultMap="ElectricVehicleResult">
+        <include refid="selectElectricVehicleVo"/>
+        <where>  
+            <if test="ownerName != null  and ownerName != ''"> and owner_name like concat('%', #{ownerName}, '%')</if>
+            <if test="phoneNumber != null "> and phone_number = #{phoneNumber}</if>
+            <if test="plateNumber != null "> and plate_number = #{plateNumber}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="registerTime != null "> and register_time = #{registerTime}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectElectricVehicleByVehicleId" parameterType="Long" resultMap="ElectricVehicleResult">
+        <include refid="selectElectricVehicleVo"/>
+        where vehicle_id = #{vehicleId}
+    </select>
+
+    <insert id="insertElectricVehicle" parameterType="ElectricVehicle">
+        insert into electric_vehicle
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="vehicleId != null">vehicle_id,</if>
+            <if test="ownerName != null">owner_name,</if>
+            <if test="phoneNumber != null">phone_number,</if>
+            <if test="plateNumber != null">plate_number,</if>
+            <if test="brand != null">brand,</if>
+            <if test="registerTime != null">register_time,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="vehicleId != null">#{vehicleId},</if>
+            <if test="ownerName != null">#{ownerName},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
+            <if test="plateNumber != null">#{plateNumber},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="registerTime != null">#{registerTime},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateElectricVehicle" parameterType="ElectricVehicle">
+        update electric_vehicle
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ownerName != null">owner_name = #{ownerName},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
+            <if test="plateNumber != null">plate_number = #{plateNumber},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="registerTime != null">register_time = #{registerTime},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where vehicle_id = #{vehicleId}
+    </update>
+
+    <delete id="deleteElectricVehicleByVehicleId" parameterType="Long">
+        delete from electric_vehicle where vehicle_id = #{vehicleId}
+    </delete>
+
+    <delete id="deleteElectricVehicleByVehicleIds" parameterType="String">
+        delete from electric_vehicle where vehicle_id in 
+        <foreach item="vehicleId" collection="array" open="(" separator="," close=")">
+            #{vehicleId}
+        </foreach>
+    </delete>
+</mapper>

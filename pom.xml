@@ -5,7 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ruoyi</groupId>
+<<<<<<< HEAD
     <artifactId>ruoyi</artifactId>
+=======
+    <artifactId>campus-service</artifactId>
+>>>>>>> 3f39bf9 (优化)
     <version>3.6.5</version>
 
     <name>ruoyi</name>
@@ -186,70 +190,110 @@
             <!-- 核心模块 -->
             <dependency>
                 <groupId>com.ruoyi</groupId>
+<<<<<<< HEAD
                 <artifactId>ruoyi-common-core</artifactId>
+=======
+                <artifactId>campus-service-common-core</artifactId>
+>>>>>>> 3f39bf9 (优化)
                 <version>${ruoyi.version}</version>
             </dependency>
 
             <!-- 接口模块 -->
             <dependency>
                 <groupId>com.ruoyi</groupId>
+<<<<<<< HEAD
                 <artifactId>ruoyi-common-swagger</artifactId>
+=======
+                <artifactId>campus-service-common-swagger</artifactId>
+>>>>>>> 3f39bf9 (优化)
                 <version>${ruoyi.version}</version>
             </dependency>
 
             <!-- 安全模块 -->
             <dependency>
                 <groupId>com.ruoyi</groupId>
+<<<<<<< HEAD
                 <artifactId>ruoyi-common-security</artifactId>
+=======
+                <artifactId>campus-service-common-security</artifactId>
+>>>>>>> 3f39bf9 (优化)
                 <version>${ruoyi.version}</version>
             </dependency>
 
             <!-- 数据脱敏 -->
             <dependency>
                 <groupId>com.ruoyi</groupId>
+<<<<<<< HEAD
                 <artifactId>ruoyi-common-sensitive</artifactId>
+=======
+                <artifactId>campus-service-common-sensitive</artifactId>
+>>>>>>> 3f39bf9 (优化)
                 <version>${ruoyi.version}</version>
             </dependency>
 
             <!-- 权限范围 -->
             <dependency>
                 <groupId>com.ruoyi</groupId>
+<<<<<<< HEAD
                 <artifactId>ruoyi-common-datascope</artifactId>
+=======
+                <artifactId>campus-service-common-datascope</artifactId>
+>>>>>>> 3f39bf9 (优化)
                 <version>${ruoyi.version}</version>
             </dependency>
 
             <!-- 多数据源 -->
             <dependency>
                 <groupId>com.ruoyi</groupId>
+<<<<<<< HEAD
                 <artifactId>ruoyi-common-datasource</artifactId>
+=======
+                <artifactId>campus-service-common-datasource</artifactId>
+>>>>>>> 3f39bf9 (优化)
                 <version>${ruoyi.version}</version>
             </dependency>
 
             <!-- 分布式事务 -->
             <dependency>
                 <groupId>com.ruoyi</groupId>
+<<<<<<< HEAD
                 <artifactId>ruoyi-common-seata</artifactId>
+=======
+                <artifactId>campus-service-common-seata</artifactId>
+>>>>>>> 3f39bf9 (优化)
                 <version>${ruoyi.version}</version>
             </dependency>
 
             <!-- 日志记录 -->
             <dependency>
                 <groupId>com.ruoyi</groupId>
+<<<<<<< HEAD
                 <artifactId>ruoyi-common-log</artifactId>
+=======
+                <artifactId>campus-service-common-log</artifactId>
+>>>>>>> 3f39bf9 (优化)
                 <version>${ruoyi.version}</version>
             </dependency>
 
             <!-- 缓存服务 -->
             <dependency>
                 <groupId>com.ruoyi</groupId>
+<<<<<<< HEAD
                 <artifactId>ruoyi-common-redis</artifactId>
+=======
+                <artifactId>campus-service-common-redis</artifactId>
+>>>>>>> 3f39bf9 (优化)
                 <version>${ruoyi.version}</version>
             </dependency>
 
             <!-- 系统接口 -->
             <dependency>
                 <groupId>com.ruoyi</groupId>
+<<<<<<< HEAD
                 <artifactId>ruoyi-api-system</artifactId>
+=======
+                <artifactId>campus-service-api-system</artifactId>
+>>>>>>> 3f39bf9 (优化)
                 <version>${ruoyi.version}</version>
             </dependency>
 
@@ -257,12 +301,21 @@
     </dependencyManagement>
 
     <modules>
+<<<<<<< HEAD
         <module>ruoyi-auth</module>
         <module>ruoyi-gateway</module>
         <module>ruoyi-visual</module>
         <module>ruoyi-modules</module>
         <module>ruoyi-api</module>
         <module>ruoyi-common</module>
+=======
+        <module>campus-service-auth</module>
+        <module>campus-service-gateway</module>
+        <module>campus-service-visual</module>
+        <module>campus-service-modules</module>
+        <module>campus-service-api</module>
+        <module>campus-service-common</module>
+>>>>>>> 3f39bf9 (优化)
     </modules>
     <packaging>pom</packaging>
 

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.ruoyi</groupId>
+        <artifactId>campus-service</artifactId>
+        <version>3.6.5</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <modules>
+        <module>campus-service-system</module>
+        <module>campus-service-gen</module>
+        <module>campus-service-job</module>
+        <module>campus-service-file</module>
+        <module>campus-service-activity</module>
+        <module>campus-service-announcement</module>
+        <module>campus-service-vehicle</module>
+        <module>campus-service-leave</module>
+        <module>campus-service-lost</module>
+        <module>campus-service-salary</module>
+    </modules>
+
+    <artifactId>campus-service-modules</artifactId>
+    <packaging>pom</packaging>
+
+    <description>
+        ruoyi-modules业务模块
+    </description>
+
+</project>

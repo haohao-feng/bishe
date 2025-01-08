@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.salary.mapper.SalaryInfoMapper">
+    
+    <resultMap type="SalaryInfo" id="SalaryInfoResult">
+        <result property="id"    column="id"    />
+        <result property="teacherId"    column="teacher_id"    />
+        <result property="salaryMonth"    column="salary_month"    />
+        <result property="baseSalary"    column="base_salary"    />
+        <result property="bonus"    column="bonus"    />
+        <result property="deduction"    column="deduction"    />
+        <result property="totalSalary"    column="total_salary"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectSalaryInfoVo">
+        select id, teacher_id, salary_month, base_salary, bonus, deduction, total_salary, status from salary_info
+    </sql>
+
+    <select id="selectSalaryInfoList" parameterType="SalaryInfo" resultMap="SalaryInfoResult">
+        <include refid="selectSalaryInfoVo"/>
+        <where>  
+            <if test="teacherId != null "> and teacher_id = #{teacherId}</if>
+            <if test="salaryMonth != null "> and salary_month = #{salaryMonth}</if>
+            <if test="baseSalary != null "> and base_salary = #{baseSalary}</if>
+            <if test="bonus != null "> and bonus = #{bonus}</if>
+            <if test="deduction != null "> and deduction = #{deduction}</if>
+            <if test="totalSalary != null "> and total_salary = #{totalSalary}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectSalaryInfoById" parameterType="Long" resultMap="SalaryInfoResult">
+        <include refid="selectSalaryInfoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertSalaryInfo" parameterType="SalaryInfo">
+        insert into salary_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="teacherId != null">teacher_id,</if>
+            <if test="salaryMonth != null">salary_month,</if>
+            <if test="baseSalary != null">base_salary,</if>
+            <if test="bonus != null">bonus,</if>
+            <if test="deduction != null">deduction,</if>
+            <if test="totalSalary != null">total_salary,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="teacherId != null">#{teacherId},</if>
+            <if test="salaryMonth != null">#{salaryMonth},</if>
+            <if test="baseSalary != null">#{baseSalary},</if>
+            <if test="bonus != null">#{bonus},</if>
+            <if test="deduction != null">#{deduction},</if>
+            <if test="totalSalary != null">#{totalSalary},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSalaryInfo" parameterType="SalaryInfo">
+        update salary_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teacherId != null">teacher_id = #{teacherId},</if>
+            <if test="salaryMonth != null">salary_month = #{salaryMonth},</if>
+            <if test="baseSalary != null">base_salary = #{baseSalary},</if>
+            <if test="bonus != null">bonus = #{bonus},</if>
+            <if test="deduction != null">deduction = #{deduction},</if>
+            <if test="totalSalary != null">total_salary = #{totalSalary},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSalaryInfoById" parameterType="Long">
+        delete from salary_info where id = #{id}
+    </delete>
+
+    <delete id="deleteSalaryInfoByIds" parameterType="String">
+        delete from salary_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

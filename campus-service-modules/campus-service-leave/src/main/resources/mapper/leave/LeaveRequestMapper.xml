@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.leave.mapper.LeaveRequestMapper">
+    
+    <resultMap type="LeaveRequest" id="LeaveRequestResult">
+        <result property="id"    column="id"    />
+        <result property="studentId"    column="student_id"    />
+        <result property="leaveType"    column="leave_type"    />
+        <result property="startDate"    column="start_date"    />
+        <result property="endDate"    column="end_date"    />
+        <result property="reason"    column="reason"    />
+        <result property="status"    column="status"    />
+        <result property="approverId"    column="approver_id"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectLeaveRequestVo">
+        select id, student_id, leave_type, start_date, end_date, reason, status, approver_id, create_time from leave_request
+    </sql>
+
+    <select id="selectLeaveRequestList" parameterType="LeaveRequest" resultMap="LeaveRequestResult">
+        <include refid="selectLeaveRequestVo"/>
+        <where>  
+            <if test="studentId != null "> and student_id = #{studentId}</if>
+            <if test="leaveType != null  and leaveType != ''"> and leave_type = #{leaveType}</if>
+            <if test="startDate != null "> and start_date = #{startDate}</if>
+            <if test="endDate != null "> and end_date = #{endDate}</if>
+            <if test="reason != null  and reason != ''"> and reason = #{reason}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="approverId != null "> and approver_id = #{approverId}</if>
+        </where>
+    </select>
+    
+    <select id="selectLeaveRequestById" parameterType="Long" resultMap="LeaveRequestResult">
+        <include refid="selectLeaveRequestVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertLeaveRequest" parameterType="LeaveRequest">
+        insert into leave_request
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="studentId != null">student_id,</if>
+            <if test="leaveType != null">leave_type,</if>
+            <if test="startDate != null">start_date,</if>
+            <if test="endDate != null">end_date,</if>
+            <if test="reason != null">reason,</if>
+            <if test="status != null">status,</if>
+            <if test="approverId != null">approver_id,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="studentId != null">#{studentId},</if>
+            <if test="leaveType != null">#{leaveType},</if>
+            <if test="startDate != null">#{startDate},</if>
+            <if test="endDate != null">#{endDate},</if>
+            <if test="reason != null">#{reason},</if>
+            <if test="status != null">#{status},</if>
+            <if test="approverId != null">#{approverId},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLeaveRequest" parameterType="LeaveRequest">
+        update leave_request
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="leaveType != null">leave_type = #{leaveType},</if>
+            <if test="startDate != null">start_date = #{startDate},</if>
+            <if test="endDate != null">end_date = #{endDate},</if>
+            <if test="reason != null">reason = #{reason},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="approverId != null">approver_id = #{approverId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteLeaveRequestById" parameterType="Long">
+        delete from leave_request where id = #{id}
+    </delete>
+
+    <delete id="deleteLeaveRequestByIds" parameterType="String">
+        delete from leave_request where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.lost.mapper.LostAndFoundMapper">
+    
+    <resultMap type="LostAndFound" id="LostAndFoundResult">
+        <result property="lostId"    column="lost_id"    />
+        <result property="title"    column="title"    />
+        <result property="description"    column="description"    />
+        <result property="location"    column="location"    />
+        <result property="contact"    column="contact"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectLostAndFoundVo">
+        select lost_id, title, description, location, contact, status, create_by, create_time, update_time from lost_and_found
+    </sql>
+
+    <select id="selectLostAndFoundList" parameterType="LostAndFound" resultMap="LostAndFoundResult">
+        <include refid="selectLostAndFoundVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="location != null  and location != ''"> and location = #{location}</if>
+            <if test="contact != null  and contact != ''"> and contact = #{contact}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectLostAndFoundByLostId" parameterType="Long" resultMap="LostAndFoundResult">
+        <include refid="selectLostAndFoundVo"/>
+        where lost_id = #{lostId}
+    </select>
+
+    <insert id="insertLostAndFound" parameterType="LostAndFound">
+        insert into lost_and_found
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="lostId != null">lost_id,</if>
+            <if test="title != null">title,</if>
+            <if test="description != null">description,</if>
+            <if test="location != null">location,</if>
+            <if test="contact != null">contact,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="lostId != null">#{lostId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="description != null">#{description},</if>
+            <if test="location != null">#{location},</if>
+            <if test="contact != null">#{contact},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLostAndFound" parameterType="LostAndFound">
+        update lost_and_found
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="location != null">location = #{location},</if>
+            <if test="contact != null">contact = #{contact},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where lost_id = #{lostId}
+    </update>
+
+    <delete id="deleteLostAndFoundByLostId" parameterType="Long">
+        delete from lost_and_found where lost_id = #{lostId}
+    </delete>
+
+    <delete id="deleteLostAndFoundByLostIds" parameterType="String">
+        delete from lost_and_found where lost_id in 
+        <foreach item="lostId" collection="array" open="(" separator="," close=")">
+            #{lostId}
+        </foreach>
+    </delete>
+</mapper>

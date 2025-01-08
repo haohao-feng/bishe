@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.announcement.mapper.AnnoucementMapper">
+    
+    <resultMap type="Annoucement" id="AnnoucementResult">
+        <result property="announcementId"    column="announcement_id"    />
+        <result property="title"    column="title"    />
+        <result property="content"    column="content"    />
+        <result property="publishTime"    column="publish_time"    />
+        <result property="publisher"    column="publisher"    />
+        <result property="stasus"    column="stasus"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="type"    column="type"    />
+    </resultMap>
+
+    <sql id="selectAnnoucementVo">
+        select announcement_id, title, content, publish_time, publisher, stasus, create_time, update_time, type from annoucement
+    </sql>
+
+    <select id="selectAnnoucementList" parameterType="Annoucement" resultMap="AnnoucementResult">
+        <include refid="selectAnnoucementVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="publishTime != null "> and publish_time = #{publishTime}</if>
+            <if test="publisher != null  and publisher != ''"> and publisher = #{publisher}</if>
+            <if test="stasus != null  and stasus != ''"> and stasus = #{stasus}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+        </where>
+    </select>
+    
+    <select id="selectAnnoucementByAnnouncementId" parameterType="Long" resultMap="AnnoucementResult">
+        <include refid="selectAnnoucementVo"/>
+        where announcement_id = #{announcementId}
+    </select>
+
+    <insert id="insertAnnoucement" parameterType="Annoucement">
+        insert into annoucement
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="announcementId != null">announcement_id,</if>
+            <if test="title != null">title,</if>
+            <if test="content != null">content,</if>
+            <if test="publishTime != null">publish_time,</if>
+            <if test="publisher != null">publisher,</if>
+            <if test="stasus != null">stasus,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="type != null">type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="announcementId != null">#{announcementId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="content != null">#{content},</if>
+            <if test="publishTime != null">#{publishTime},</if>
+            <if test="publisher != null">#{publisher},</if>
+            <if test="stasus != null">#{stasus},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="type != null">#{type},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAnnoucement" parameterType="Annoucement">
+        update annoucement
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="publishTime != null">publish_time = #{publishTime},</if>
+            <if test="publisher != null">publisher = #{publisher},</if>
+            <if test="stasus != null">stasus = #{stasus},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="type != null">type = #{type},</if>
+        </trim>
+        where announcement_id = #{announcementId}
+    </update>
+
+    <delete id="deleteAnnoucementByAnnouncementId" parameterType="Long">
+        delete from annoucement where announcement_id = #{announcementId}
+    </delete>
+
+    <delete id="deleteAnnoucementByAnnouncementIds" parameterType="String">
+        delete from annoucement where announcement_id in 
+        <foreach item="announcementId" collection="array" open="(" separator="," close=")">
+            #{announcementId}
+        </foreach>
+    </delete>
+</mapper>

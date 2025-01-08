@@ -1,11 +1,21 @@
+<<<<<<< HEAD
 DROP DATABASE IF EXISTS `ry-config`;
 
 CREATE DATABASE  `ry-config` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+=======
+-- DROP DATABASE IF EXISTS `ry-config`;
+
+CREATE DATABASE  `campus-config` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+>>>>>>> 3f39bf9 (优化)
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
+<<<<<<< HEAD
 USE `ry-config`;
+=======
+USE `campus-config`;
+>>>>>>> 3f39bf9 (优化)
 
 /******************************************/
 /*   表名称 = config_info   */
